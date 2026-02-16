@@ -1,0 +1,237 @@
+public class ArrayAsList {
+    // Data Members
+    private int size;
+    private int arr[];
+    private int arr2[] = { 6, 7, 8, 9, 10 };
+    private int arr3[];
+    private int idx;
+
+    // Using Default Constructor
+    public ArrayAsList() {
+        this.size = 5;
+        this.arr = new int[size];
+        this.idx = -1;
+    }
+
+    // Using Parameterized Constructor
+    public ArrayAsList(int capacity) {
+        this.size = capacity;
+        this.arr = new int[size];
+        this.idx = -1;
+    }
+
+    // Adding Method
+    public void addAtLast(int data) {
+        if (this.size - 1 == this.idx) {
+            System.out.println("Array is Full");
+            return;
+        } else {
+            this.idx++;
+            this.arr[this.idx] = data;
+        }
+    }
+
+    public void addAtBegin(int data) {
+        if (size - 1 == this.idx) {
+            System.out.println("Array is Full");
+            return;
+        } else {
+            this.idx++;
+            for (int i = this.idx; i > 0; i--) {
+                this.arr[i] = this.arr[i + 1];
+            }
+            this.arr[0] = data;
+        }
+        System.out.println("Added Successfully");
+    }
+
+    public void addAtPosition(int data, int pos) {
+        if (this.size - 1 == this.idx) {
+            System.out.println("Array is Full");
+            return;
+        } else {
+            this.idx++;
+            for (int i = this.idx; i > pos - 1; i--) {
+                this.arr[i] = this.arr[i - 1];
+            }
+            this.arr[pos - 1] = data;
+        }
+        System.out.println("Added Successfully");
+    }
+
+    // Deleting Method
+    public void deleteFromEnd() {
+        if (this.idx == -1) {
+            System.out.println("Array is Empty");
+        } else {
+            this.idx--;
+            System.out.println("Deleted Successfully");
+        }
+    }
+
+    public void deleteFromBegin() {
+        if (this.idx == -1) {
+            System.out.println("Array is Empty");
+        } else {
+            // int data = this.arr[0];
+            for (int i = 0; i < this.idx; i++) {
+                this.arr[i] = this.arr[i + 1];
+            }
+            this.idx--;
+            // System.out.println("Deleted Successfully and Deleted Element is " + data);
+        }
+    }
+
+    public void deleteFromPosition(int pos) {
+        if (this.idx == -1) {
+            System.out.println("Array is Empty");
+        } else {
+            int data = this.arr[pos - 1];
+            for (int i = pos - 1; i <= this.idx - 1; i++) {
+                this.arr[i] = this.arr[i + 1];
+            }
+            this.idx--;
+            System.out.println("Deleted Successfully and Deleted Element is " + data);
+        }
+
+    }
+
+    // Searching
+    public void search(int key) {
+        if (this.idx == -1) {
+            System.out.println("Array is Empty");
+        } else {
+            for (int i = 0; i <= this.idx; i++) {
+                if (this.arr[i] == key) {
+                    System.out.println("Element Found at Index " + i);
+                    return;
+                }
+            }
+            System.out.println("Element Not Found");
+        }
+    }
+
+    // Methods display
+    public void display() {
+        if (this.idx == -1) {
+            System.out.println("Array is Empty");
+            return;
+        }
+        for (int i = 0; i <= this.idx; i++) {
+            System.out.print(this.arr[i] + " | ");
+        }
+    }
+
+    // Method to show the size of array
+    public void size() {
+        System.out.println("Size of Array " + this.size);
+    }
+
+    // Merge two arrays
+    public void merge() {
+        this.arr3 = new int[arr.length + arr2.length];
+        for (int i = 0; i < arr.length; i++) {
+            this.arr3[i] = this.arr[i];
+        }
+
+        for (int i = 0; i < arr2.length; i++) {
+            this.arr3[i + arr.length] = this.arr2[i];
+        }
+        System.err.println("\nArray after merging");
+
+        for (int i = 0; i < arr3.length; i++) {
+            System.out.print(arr3[i]+" | ");
+        }
+    }
+
+    public void sortedMerge(){
+        //Using Bubble Sort
+        this.arr3 = new int[arr.length + arr2.length];
+        for (int i = 0; i < arr.length; i++) {
+            this.arr3[i] = this.arr[i];
+        }
+
+        for (int i = 0; i < arr2.length; i++) {
+            this.arr3[i + arr.length] = this.arr2[i];
+        }
+
+        for(int i=0;i<this.arr3.length-1;i++){
+            for(int j=0;j<this.arr3.length-i-1;j++){
+                if(this.arr3[j]>this.arr3[j+1]){
+                    int temp=this.arr3[j];
+                    this.arr3[j]=this.arr3[j+1];
+                    this.arr3[j+1]=temp;
+                }
+            }
+        }
+        System.err.println("\nArray after merging");
+    }
+    void reverse(){
+        if(idx==-1){
+            System.out.println("Array is Empty");
+            return;
+        }
+        else{
+            for(int i=idx;i>=0;i--){
+        System.out.println(arr[i]+" | ");
+        }
+        
+    }
+    }
+
+    int sumOfAllElements(){
+        int sum=0;
+        if(idx==-1){
+            System.out.println("Array is Empty");
+            return 0;
+        }
+        else{
+            for(int i=0;i<=idx;i++){
+                sum+=arr[i];
+            }
+            return sum;
+        }
+        
+    }
+    
+
+    //Rotation
+
+    public static void main(String[] args) {
+        ArrayAsList list = new ArrayAsList();
+        list.addAtLast(10);
+        list.addAtLast(20);
+        list.addAtLast(30);
+        list.addAtLast(40);
+        list.addAtLast(50);
+        // list.addAtLast(100);
+        // list.display();
+        // list.addAtBegin(67);
+        // list.display();
+        // list.addAtPosition(100,2);
+        // list.display();
+        // list.deleteFromEnd();
+        // list.display();
+        // list.deleteFromBegin();
+        // list.display();
+        // list.deleteFromPosition(2);
+        // list.display();
+        // list.search(100);
+
+        // list.merge();
+        // list.display();
+
+        list.reverse();
+        System.out.println("\nSum of all elements "+list.sumOfAllElements());
+
+        /*
+         * ArrayAsList list=new ArrayAsList(10);
+         * list.addAtLast(10);
+         * list.addAtLast(20);
+         * list.addAtLast(30);
+         * list.display();
+         * list.size();
+         */
+    }
+
+}
